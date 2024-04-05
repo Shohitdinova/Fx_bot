@@ -1,0 +1,11 @@
+
+telegram:
+  bot:
+    token: 6932468545:AAEugcT_4hIlE7p4-5_SMr1ppFQGGp209Wg
+    username:  t.me/JavaFxx_bot
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: 123
