@@ -85,8 +85,7 @@ public class MyTelegramBot extends TelegramLongPollingBot {
         // Faylni yuklab olish uchun URL yaratish
         String fileUrl = "https://api.telegram.org/file/bot" + getBotToken() + "/" + filePath;
 
-        // Faylni yuklab olish vaqtida faylni joylashuvini aniqlash
-        String downloadDirectory = "downloads"; // Fayllarni saqlash uchun direktoriya nomi
+        String downloadDirectory = "downloads";
         String saveFilePath = downloadDirectory + "/" + fileName;
 
         try {
@@ -96,7 +95,6 @@ public class MyTelegramBot extends TelegramLongPollingBot {
             connection.setRequestMethod("GET");
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                // Faylni joylashuvi
                 InputStream inputStream = connection.getInputStream();
                 FileOutputStream outputStream = new FileOutputStream(saveFilePath);
                 byte[] buffer = new byte[4096];
@@ -114,14 +112,12 @@ public class MyTelegramBot extends TelegramLongPollingBot {
             throw new TelegramBotException("Failed to download file");
         }
 
-        // Yuklab olinadigan faylni joylashuvi
         return new File(saveFilePath);
     }
     private void moveFileToStaticFolder(java.io.File file) throws IOException {
         Path staticFolder = Path.of("src/main/resources/static");
         Path destination = staticFolder.resolve(file.getName());
         Files.copy(file.toPath(), destination, StandardCopyOption.REPLACE_EXISTING);
-        // Properly close resources
         Files.deleteIfExists(file.toPath());
     }
 
